@@ -62,6 +62,9 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
 
+    // Glide
+    implementation(libs.glide.compose)
+
     implementation(libs.ui)
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
