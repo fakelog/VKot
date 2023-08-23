@@ -1,13 +1,10 @@
 package ru.fakelog.vkot.ui.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import ru.fakelog.vkot.ui.screen.auth.AuthScreen
 import ru.fakelog.vkot.ui.screen.auth.AuthViewModel
 import ru.fakelog.vkot.ui.screen.main.MainScreen
@@ -24,19 +21,19 @@ object MainDestinations {
 @Composable
 fun VKotNavHost(
     navController: NavHostController,
-    startDestination: String = MainDestinations.Route.MAIN_ROUTE,
-    mainViewModel: MainViewModel
+    startDestination: String = MainDestinations.Route.MAIN_ROUTE
 ) {
     NavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(MainDestinations.Route.MAIN_ROUTE) {
-            MainScreen(viewModel = mainViewModel, navController = navController)
-        }
         composable(MainDestinations.Route.AUTH_ROUTE) {
-            val viewModel: AuthViewModel = hiltViewModel()
-            AuthScreen(viewModel = viewModel)
+            val viewModel = hiltViewModel<AuthViewModel>()
+            AuthScreen(navController, viewModel)
+        }
+        composable(MainDestinations.Route.MAIN_ROUTE) {
+            val viewModel = hiltViewModel<MainViewModel>()
+            MainScreen(navController, viewModel)
         }
     }
 }
