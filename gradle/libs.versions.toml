@@ -15,6 +15,7 @@ junit = "4.13.2"
 kotlin = "1.8.10"
 kotlin-coroutines = "1.7.3"
 kotlinx-serialization-json = "1.5.1"
+ksp = "1.8.10-1.0.9"
 lifecycle-runtime-ktx = "2.6.1"
 logging-interceptor = "5.0.0-alpha.11"
 material = "1.9.0"
@@ -73,9 +74,10 @@ androidx-browser = { group = "androidx.browser", name = "browser", version = "1.
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 hiltAndroid = {id = "com.google.dagger.hilt.android", version.ref = "hilt"}
-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+# kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinPluginSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
 
 [bundles]
