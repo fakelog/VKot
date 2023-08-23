@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.onEach
 import ru.fakelog.vkot.domain.auth.entity.request.TokenRequest
 import ru.fakelog.vkot.domain.auth.use_case.LoginUseCase
 import ru.fakelog.vkot.domain.utils.Resource
-import ru.fakelog.vkot.ui.screen.auth.AuthViewModel
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,9 +27,6 @@ class LoginViewModel @Inject constructor(
     val loginMessage = _loginMessage
     val password: State<String> get() = _password
     val username: State<String> get() = _username
-
-    private val authViewModel = AuthViewModel()
-
     fun setPassword(value: String) {
         _password.value = value
     }
@@ -63,7 +59,6 @@ class LoginViewModel @Inject constructor(
                         _loginMessage.value = message
                     }
                     is Resource.Loading -> {
-                        authViewModel.setShowStatusIndicator(true)
                         Log.d("_loginResponse", "Loading...")
                     }
                     is Resource.Default -> {
