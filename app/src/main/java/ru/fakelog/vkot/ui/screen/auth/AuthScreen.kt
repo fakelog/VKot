@@ -41,10 +41,10 @@ fun AuthScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(Modifier.weight(0.01f))
-        Text(text = "VKot ID")
+        Text(text = stringResource(R.string.vkot_id))
         Spacer(Modifier.weight(0.30f))
         Text(
-            text = "Вход ВКонтакте",
+            text = stringResource(R.string.login_vk),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleLarge
         )
