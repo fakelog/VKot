@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_vk">Вход ВКонтакте</string>
+    <string name="login">Вход</string>
+    <string name="registration">Регистрация</string>
+</resources>
