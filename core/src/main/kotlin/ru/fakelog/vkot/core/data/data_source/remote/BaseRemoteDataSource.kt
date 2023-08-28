@@ -1,6 +1,9 @@
 package ru.fakelog.vkot.core.data.data_source.remote
 
 import android.util.Log
+import kotlinx.serialization.json.Json
+import retrofit2.HttpException
+import ru.fakelog.vkot.core.domain.utils.ErrorResponse
 import ru.fakelog.vkot.core.domain.utils.FailureStatus
 import ru.fakelog.vkot.core.domain.utils.Result
 import java.net.ConnectException
@@ -58,6 +61,33 @@ open class BaseRemoteDataSource @Inject constructor() {
 //            }
         } catch (throwable: Throwable) {
             when (throwable) {
+                is HttpException -> {
+                    when {
+                        throwable.code() == 401 -> {
+                            val errorResponse = Json.decodeFromString<ErrorResponse>(
+                                throwable.response()?.errorBody()!!.charStream().readText()
+                            )
+
+                            return Result.Failure(FailureStatus.API_FAIL, throwable.code(), errorResponse.description)
+                        }
+
+                        else -> {
+                            return if (throwable.response()?.errorBody()!!.charStream().readText().isNullOrEmpty()) {
+                                Result.Failure(FailureStatus.API_FAIL, throwable.code())
+                            } else {
+                                try {
+                                    val errorResponse = Json.decodeFromString<ErrorResponse>(
+                                        throwable.response()?.errorBody()!!.charStream().readText()
+                                    )
+
+                                    Result.Failure(FailureStatus.API_FAIL, throwable.code(), errorResponse.error)
+                                } catch (ex: Throwable) {
+                                    Result.Failure(FailureStatus.API_FAIL, throwable.code())
+                                }
+                            }
+                        }
+                    }
+                }
 //                is HttpException -> {
 //                    when {
 //                        throwable.code() == 422 -> {
