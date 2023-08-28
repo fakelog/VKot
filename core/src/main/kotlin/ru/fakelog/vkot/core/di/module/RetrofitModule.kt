@@ -13,6 +13,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import ru.fakelog.vkot.core.network.interceptor.VkInterceptor
 import ru.fakelog.vkot.core.network.provider.retrofitProvider
 import javax.inject.Named
 import javax.inject.Singleton
@@ -56,11 +57,17 @@ object RetrofitModule {
 
     @Provides
     @Singleton
+    fun provideVkInterceptor(): VkInterceptor = VkInterceptor()
+
+    @Provides
+    @Singleton
     fun provideOkHttpClient(
         interceptor: ChuckerInterceptor,
+        vkInterceptor: VkInterceptor,
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(vkInterceptor)
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(interceptor)
             .build()

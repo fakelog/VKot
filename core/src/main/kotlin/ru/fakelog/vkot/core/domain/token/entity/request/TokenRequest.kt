@@ -10,8 +10,7 @@ data class TokenRequest(
     @SerialName("client_secret") val clientSecret: String,
     @SerialName("username") var username: String,
     @SerialName("password") var password: String,
-    @SerialName("scope") val scope: Int,
-    @SerialName("v") val apiVersion: String
+    @SerialName("scope") val scope: Int
 ) {
     constructor(): this(
         "password",
@@ -19,8 +18,7 @@ data class TokenRequest(
         "hHbZxrka2uZ6jB1inYsH",
         "",
         "",
-        501202911,
-        "5.131"
+        501202911
     )
 
     fun toMap(): HashMap<String, Any> {
@@ -30,8 +28,7 @@ data class TokenRequest(
             "client_secret" to clientSecret,
             "username" to username,
             "password" to password,
-            "scope" to scope,
-            "v" to apiVersion
+            "scope" to scope
         )
     }
 }
