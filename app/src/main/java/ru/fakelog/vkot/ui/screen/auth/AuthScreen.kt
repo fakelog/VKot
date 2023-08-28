@@ -11,6 +11,7 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -60,6 +61,10 @@ fun AuthScreen(
             Text(text = stringResource(R.string.registration))
         }
         Spacer(Modifier.weight(1f))
+        TextButton(onClick = { /*TODO*/ }) {
+            Text(text = "Settings")
+        }
+        Spacer(Modifier.weight(0.01f))
     }
     if (showBottomSheet) {
         val clickedButton by viewModel.clickedButton.collectAsState()
