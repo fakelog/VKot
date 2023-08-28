@@ -10,10 +10,14 @@ class VkInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         val builder = request.url.newBuilder()
+        val token = ""
 
-        if (needParameters(request)) { builder
-//            .addQueryParameter(ApiConstants.ACCESS_TOKEN)
-            .addQueryParameter(ApiConstants.VERSION, ApiConstants.API_VERSION)
+        if (needParameters(request, ApiConstants.NO_TOKEN_HEADER_KEY)) {
+            builder.addQueryParameter(ApiConstants.ACCESS_TOKEN, token)
+        }
+
+        if (needParameters(request, ApiConstants.NO_VERSION_HEADER_KEY)) {
+            builder.addQueryParameter(ApiConstants.VERSION, ApiConstants.API_VERSION)
         }
 
         val url = builder.build()
@@ -26,5 +30,5 @@ class VkInterceptor: Interceptor {
         return chain.proceed(request)
     }
 
-    private fun needParameters(request: Request) = request.header(ApiConstants.NO_TOKEN_HEADER_KEY).isNullOrEmpty()
+    private fun needParameters(request: Request, parameters: String) = request.header(parameters).isNullOrEmpty()
 }

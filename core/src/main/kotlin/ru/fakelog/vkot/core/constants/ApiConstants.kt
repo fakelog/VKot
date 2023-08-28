@@ -8,4 +8,7 @@ object ApiConstants {
 
     const val NO_TOKEN_HEADER_KEY = "No-Token"
     const val NO_TOKEN_HEADER = "$NO_TOKEN_HEADER_KEY: 1"
+
+    const val NO_VERSION_HEADER_KEY = "No-Version"
+    const val NO_VERSION_HEADER = "$NO_VERSION_HEADER_KEY: 1"
 }
