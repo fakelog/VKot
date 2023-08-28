@@ -26,7 +26,7 @@ fun NavScreen(
             }
         }
         is AuthState.Failure -> {
-            ErrorScreen((loggedInState as AuthState.Failure).failureStatus)
+            ErrorScreen((loggedInState as AuthState.Failure))
         }
         AuthState.Loading -> {
             CircularProgressIndicator()

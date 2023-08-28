@@ -6,16 +6,17 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import ru.fakelog.vkot.core.domain.utils.FailureStatus
+import ru.fakelog.vkot.core.domain.auth.entity.states.AuthState
 
 @Composable
-fun ErrorScreen(failureStatus: FailureStatus) {
+fun ErrorScreen(failure: AuthState.Failure) {
     Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Error!")
-        Text(text = "Type: $failureStatus")
+        Text(text = "Type: ${failure.failureStatus}")
+        Text(text = "Type: ${failure.message}")
         Button(onClick = { /*TODO*/ }) {
             Text(text = "Send Error")
         }

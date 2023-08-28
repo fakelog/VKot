@@ -35,7 +35,7 @@ class NavViewModel @Inject constructor(
                         is Result.Failure -> {
                             when (result.failureStatus) {
                                 FailureStatus.EMPTY -> loggedInState.value = AuthState.Default
-                                else -> loggedInState.value = AuthState.Failure(result.failureStatus)
+                                else -> loggedInState.value = AuthState.Failure(result.failureStatus, result.message)
                             }
 
                         }
