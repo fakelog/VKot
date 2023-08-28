@@ -25,6 +25,8 @@ class VkInterceptor: Interceptor {
         request = request.newBuilder()
             .url(url)
             .removeHeader(ApiConstants.NO_TOKEN_HEADER_KEY)
+            .removeHeader(ApiConstants.NO_VERSION_HEADER)
+
             .build()
 
         return chain.proceed(request)

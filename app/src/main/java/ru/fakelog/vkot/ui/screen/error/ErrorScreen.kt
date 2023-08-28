@@ -6,10 +6,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import ru.fakelog.vkot.core.domain.auth.entity.states.AuthState
+import ru.fakelog.vkot.core.domain.utils.Result
 
 @Composable
-fun ErrorScreen(failure: AuthState.Failure) {
+fun ErrorScreen(failure: Result.Failure) {
     Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally

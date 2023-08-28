@@ -4,6 +4,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import ru.fakelog.vkot.core.data.accounts.data_source.local.AccountEntity
+import ru.fakelog.vkot.core.domain.accounts.use_case.AccountsUseCase
 import ru.fakelog.vkot.core.domain.token.entity.model.Token
 import ru.fakelog.vkot.core.domain.token.entity.request.TokenRequest
 import ru.fakelog.vkot.core.domain.token.entity.request.TokenValidationException
@@ -15,6 +17,7 @@ import kotlin.jvm.Throws
 
 
 class LoginUseCase @Inject constructor(
+    private val accountsUseCase: AccountsUseCase,
     private val tokenUseCase: TokenUseCase
 ) {
     @Throws(TokenValidationException::class)
@@ -31,6 +34,8 @@ class LoginUseCase @Inject constructor(
 
         val result = tokenUseCase.getToken(request.toMap())
         if (result is Result.Success) {
+            val account = AccountEntity(userId = result.value.userId)
+            accountsUseCase.saveAccountToLocal(account)
             tokenUseCase.saveTokenToLocal(result.value)
         }
 

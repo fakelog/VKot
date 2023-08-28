@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import ru.fakelog.vkot.core.constants.RouteConstants
 import ru.fakelog.vkot.core.domain.auth.entity.states.AuthState
+import ru.fakelog.vkot.core.domain.utils.Result
 import ru.fakelog.vkot.ui.navigation.addMainDestinations
 import ru.fakelog.vkot.ui.screen.error.ErrorScreen
 
@@ -26,7 +27,12 @@ fun NavScreen(
             }
         }
         is AuthState.Failure -> {
-            ErrorScreen((loggedInState as AuthState.Failure))
+            ErrorScreen(
+                Result.Failure(
+                    failureStatus = (loggedInState as AuthState.Failure).failureStatus,
+                    message = (loggedInState as AuthState.Failure).message
+                )
+            )
         }
         AuthState.Loading -> {
             CircularProgressIndicator()

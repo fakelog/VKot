@@ -84,8 +84,6 @@ dependencies {
     // Room
     implementation(libs.room.runtime)
 
-//    implementation(libs.logging.interceptor)
-
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
@@ -93,11 +91,8 @@ dependencies {
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
 
-//    debugImplementation(libs.chucker.library)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
-
-//    releaseImplementation(libs.chucker.library.no.op)
 
     // Project Modules
     implementation(project(":core"))

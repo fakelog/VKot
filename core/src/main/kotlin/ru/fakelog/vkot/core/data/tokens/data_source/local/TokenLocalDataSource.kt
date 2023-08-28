@@ -10,4 +10,7 @@ class TokenLocalDataSource @Inject constructor(private val db: AppDatabase): Bas
         db.tokenDao().getAllTokens()
     }
 
+    suspend fun getTokenByUserId(userId: Long) = safeDbCall {
+        db.tokenDao().getTokenByUserId(userId)
+    }
 }

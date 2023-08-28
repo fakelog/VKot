@@ -8,7 +8,9 @@ interface TokenRepository {
 
     suspend fun getAllLocalTokens(): Result<List<TokenEntity>>
 
-    suspend fun getToken(request: HashMap<String, Any>): Result<Token>
+    suspend fun getLocalTokenByUserId(userId: Long): Result<TokenEntity>
+
+    suspend fun getRemoteToken(request: HashMap<String, Any>): Result<Token>
 
     suspend fun saveTokenToLocal(token: TokenEntity)
 }

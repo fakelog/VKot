@@ -13,9 +13,11 @@ class TokenRepositoryImpl @Inject constructor(
     private val remoteDataSource: TokenRemoteDataSource
 ) : TokenRepository {
 
-    override suspend fun getToken(request: HashMap<String, Any>) = remoteDataSource.getToken(request)
-
     override suspend fun getAllLocalTokens() = localDataSource.getAllTokens()
+
+    override suspend fun getLocalTokenByUserId(userId: Long) = localDataSource.getTokenByUserId(userId)
+
+    override suspend fun getRemoteToken(request: HashMap<String, Any>) = remoteDataSource.getToken(request)
 
     override suspend fun saveTokenToLocal(token: TokenEntity) = db.tokenDao().insert(token)
 }
