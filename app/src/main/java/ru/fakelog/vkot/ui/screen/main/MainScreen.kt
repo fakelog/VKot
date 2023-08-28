@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
-import ru.fakelog.vkot.ui.navigation.MainDestinations
+import ru.fakelog.vkot.core.constants.RouteConstants
 import ru.fakelog.vkot.utils.HashUtils
 
 @Composable
@@ -28,7 +28,7 @@ fun MainScreen(navController: NavController, viewModel: MainViewModel) {
     Button(
         onClick = {
             navController.popBackStack()
-            navController.navigate(MainDestinations.Route.AUTH_ROUTE)
+            navController.navigate(RouteConstants.AUTH_ROUTE)
         }
     ) {
 

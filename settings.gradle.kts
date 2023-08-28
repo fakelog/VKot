@@ -15,5 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "VKot"
 include(":app")
-include(":domain")
-include(":data")
+include(":core")

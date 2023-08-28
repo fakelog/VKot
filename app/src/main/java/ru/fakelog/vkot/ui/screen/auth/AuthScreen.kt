@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.fakelog.vkot.R
-import ru.fakelog.vkot.domain.auth.enums.AuthButton
+import ru.fakelog.vkot.core.domain.auth.entity.enums.AuthButton
 import ru.fakelog.vkot.ui.screen.auth.login.LoginScreen
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,10 +1,9 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
-    //alias(libs.plugins.kapt)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -75,15 +74,17 @@ dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
-    implementation(libs.androidx.browser)
-    //kapt(libs.hilt.compiler)
+//    implementation(libs.androidx.browser)
     ksp(libs.hilt.compiler)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlinx.serialization.converter)
     implementation(libs.kotlinx.serialization.json)
 
-    implementation(libs.logging.interceptor)
+    // Room
+    implementation(libs.room.runtime)
+
+//    implementation(libs.logging.interceptor)
 
     testImplementation(libs.junit)
 
@@ -92,13 +93,12 @@ dependencies {
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
 
-    debugImplementation(libs.chucker.library)
+//    debugImplementation(libs.chucker.library)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
 
-    releaseImplementation(libs.chucker.library.no.op)
+//    releaseImplementation(libs.chucker.library.no.op)
 
     // Project Modules
-    implementation(project(":data"))
-    implementation(project(":domain"))
+    implementation(project(":core"))
 }

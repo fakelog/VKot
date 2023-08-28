@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import ru.fakelog.vkot.domain.auth.entity.request.TokenRequest
-import ru.fakelog.vkot.domain.auth.use_case.LoginUseCase
-import ru.fakelog.vkot.domain.utils.Resource
+import ru.fakelog.vkot.core.domain.token.entity.request.TokenRequest
+import ru.fakelog.vkot.core.domain.auth.use_case.LoginUseCase
+import ru.fakelog.vkot.core.domain.utils.Result
 import javax.inject.Inject
 
 @HiltViewModel
@@ -47,21 +47,20 @@ class LoginViewModel @Inject constructor(
             }
             .onEach { result ->
                 when (result) {
-                    is Resource.Success -> {
+                    is Result.Success -> {
                         val baseResponse = result.value
-                        val actualResult = baseResponse.result
-                        Log.d("_loginResponse", actualResult.toString())
+                        val actualResult = baseResponse.userId
                     }
-                    is Resource.Failure -> {
+                    is Result.Failure -> {
 //                        val failureStatus = result.failureStatus
 //                        val code = result.code
                         val message = result.message
-                        _loginMessage.value = message
+                        _loginMessage.value = message.toString()
                     }
-                    is Resource.Loading -> {
+                    is Result.Loading -> {
                         Log.d("_loginResponse", "Loading...")
                     }
-                    is Resource.Default -> {
+                    is Result.Default -> {
                         Log.d("_loginResponse", "Default")
                     }
                 }

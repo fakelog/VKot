@@ -7,10 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import ru.fakelog.vkot.ui.navigation.MainDestinations
+import ru.fakelog.vkot.core.constants.RouteConstants
 import ru.fakelog.vkot.ui.navigation.VKotNavHost
 import ru.fakelog.vkot.ui.theme.VKotTheme
 
@@ -27,14 +26,12 @@ class MainActivity: ComponentActivity() {
 }
 
 @Composable
-private fun Content(
-    viewModel: MainViewModel = hiltViewModel()
-) {
+private fun Content() {
     val navController = rememberNavController()
 
     VKotTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            VKotNavHost(navController, startDestination = MainDestinations.Route.MAIN_ROUTE)
+            VKotNavHost(navController, RouteConstants.MAIN_ROUTE)
         }
     }
 }

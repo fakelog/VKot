@@ -2,38 +2,33 @@ package ru.fakelog.vkot.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ru.fakelog.vkot.core.constants.RouteConstants
 import ru.fakelog.vkot.ui.screen.auth.AuthScreen
 import ru.fakelog.vkot.ui.screen.auth.AuthViewModel
 import ru.fakelog.vkot.ui.screen.main.MainScreen
 import ru.fakelog.vkot.ui.screen.main.MainViewModel
-
-object MainDestinations {
-
-    object Route {
-        const val AUTH_ROUTE = "auth"
-        const val MAIN_ROUTE = "main"
-    }
-}
+import ru.fakelog.vkot.ui.screen.navigation.NavScreen
+import ru.fakelog.vkot.ui.screen.navigation.NavViewModel
 
 @Composable
 fun VKotNavHost(
     navController: NavHostController,
-    startDestination: String = MainDestinations.Route.MAIN_ROUTE
+    startDestination: String = RouteConstants.MAIN_ROUTE
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = startDestination
-    ) {
-        composable(MainDestinations.Route.AUTH_ROUTE) {
-            val viewModel = hiltViewModel<AuthViewModel>()
-            AuthScreen(navController, viewModel)
-        }
-        composable(MainDestinations.Route.MAIN_ROUTE) {
-            val viewModel = hiltViewModel<MainViewModel>()
-            MainScreen(navController, viewModel)
-        }
+    val navViewModel = hiltViewModel<NavViewModel>()
+    NavScreen(navController = navController, startDestination = startDestination, viewModel = navViewModel)
+}
+
+fun NavGraphBuilder.addMainDestinations(navController: NavHostController) {
+    composable(RouteConstants.AUTH_ROUTE) {
+        val viewModel = hiltViewModel<AuthViewModel>()
+        AuthScreen(navController, viewModel)
+    }
+    composable(RouteConstants.MAIN_ROUTE) {
+        val viewModel = hiltViewModel<MainViewModel>()
+        MainScreen(navController, viewModel)
     }
 }
