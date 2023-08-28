@@ -29,8 +29,12 @@ open class BaseLocalDataSource @Inject constructor() {
             }
         } catch (throwable: Throwable) {
             when (throwable) {
+                is IllegalStateException -> {
+                    val message = throwable.message.toString()
+                    return Result.Failure(FailureStatus.OTHER, message = message)
+                }
+
                 else -> {
-                    Log.e("DataBase Response", throwable.toString())
                     return Result.Failure(FailureStatus.OTHER)
                 }
             }
